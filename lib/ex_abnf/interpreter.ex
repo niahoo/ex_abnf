@@ -192,6 +192,11 @@ defmodule ABNF.Interpreter do
     {match, input}
   end
 
+  # this case happen on certain grammars and fails badly
+  defp num_concat(_, [], []) do
+    nil
+  end
+
   defp num_concat([char1|rest_list], [char2|rest_input], acc) do
     if char1 === char2 do
       num_concat rest_list, rest_input, [char1|acc]
